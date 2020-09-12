@@ -1,0 +1,38 @@
+{% extends 'main/index.html' %}
+{% block links %}
+    <link rel='stylesheet' type="text/css" href="static/view.css">
+{% endblock %}
+{% block content %}
+    {% if userDetails %}
+        <section class="text-gray-500 bg-gray-900 body-font overflow-hidden">
+          <div class="container px-5 py-24 mx-auto details-table">
+            {% for user in userDetails %}
+              {% if user.api_key %}
+              <div class="py-8 flex flex-wrap border-4 border-gray-800 rounded-md px-10 md:flex-no-wrap">
+                <div class="md:flex-grow">
+                    <h2 class="text-2xl font-medium text-white title-font">{{user.name}}</h2>
+                    <p class="leading-relaxed">{{user.rollno}}</p>
+                </div>
+                <div class="md:w-85 flex-shrink-0 flex flex-col">
+                    <span class="tracking-widest font-medium title-font text-white">API_KEY {{user.api_key}}</span>
+                    <span class="mt-1 text-gray-600 text-sm">{{user.datetime}}</span>
+                    <p class="leading-relaxed">{{user.email}}</p>
+                </div>
+              </div>
+              {% else %}
+                  <div class="py-8 flex flex-wrap md:flex-no-wrap">
+                    <div class="md:flex-grow">
+                        <h2 class="text-2xl font-medium text-white title-font">{{user.ip_address}}</h2>
+                        <p class="leading-relaxed">{{user.datetime}}</p>
+                    </div>
+                    <div class="md:w-85 pl-20 flex-shrink-1 flex flex-col">
+                        <span class="tracking-widest font-medium title-font text-white">USER_AGENT {{user.user_agent}}</span>
+                        <span class="mt-1 text-gray-600 text-sm">{{user.page}}</span>
+                    </div>
+                  </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+    {% endif %}
+{% endblock %}

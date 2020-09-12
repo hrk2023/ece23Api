@@ -1,0 +1,3 @@
+.details-table::-webkit-scrollbar{
+    display : none;
+}
